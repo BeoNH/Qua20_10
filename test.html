@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chào</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Mali',cursive;
+      background-color: #fffaf6;
+      background-image: url('./assets/BG.jpg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      color:#e84b81;
+    }
+    .wrap{ text-align:center; padding:30px; width:100%; }
+    /* Add a subtle backdrop to keep the card readable over the tiled background */
+    .panel{
+      display:inline-block;
+      padding:28px;
+      border-radius:20px;
+      background: rgba(255,255,255,0.86);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    }
+    .card{
+      width:320px; height:320px; border-radius:22px;
+      background:#fff; display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 12px 50px rgba(216,27,96,0.12), 0 0 30px rgba(255,200,210,0.55);
+      cursor:pointer; transition:transform .16s ease, box-shadow .16s ease, opacity .3s ease;
+      margin:0 auto;
+      border:4px solid rgba(255,255,255,0.6);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .card:active{ transform: scale(.99); }
+    .card img{ width:86%; height:auto; display:block; pointer-events:none; user-select:none; border-radius:12px; }
+    .hint{ margin-top:14px; color:#d84a7a; font-weight:600; font-size:1rem; opacity:0.95; }
+    @media (max-width:480px){
+      .card{width:240px;height:240px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel" role="region" aria-label="Màn chào">
+      <div id="enterCard" class="card" role="button" aria-label="Chạm vào ảnh để vào trang" tabindex="0">
+        <!-- File intro.jpg nên đặt cùng thư mục với index.html -->
+        <img src="intro.jpg" alt="Gửi đến cậu - người đang cố gắng mỗi ngày" />
+      </div>
+      <div class="hint">Chạm vào ảnh</div>
+    </div>
+  </div>
+
+  <script>
+    const card = document.getElementById('enterCard');
+    function goToMain(){
+      window.location.href = '20102025.html';
+    }
+    card.addEventListener('click', goToMain);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        goToMain();
+      }
+    });
+
+    // optional: small entrance animation
+    window.addEventListener('load', () => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(8px) scale(.98)';
+      requestAnimationFrame(() => {
+        card.style.transition = 'opacity .45s ease, transform .45s cubic-bezier(.2,.9,.2,1)';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+  </script>
+</body>
+</html>
